@@ -39,6 +39,10 @@ import AddFieldForm from '../FieldForm/AddFieldForm';
 import AddTransaction from '../AddTransaction/AddTransaction';
 import EditTransaction from '../AddTransaction/EditTransaction';
 
+
+import BuyerViewContractList from '../ViewContract/BuyerViewContractList';
+import BuyerViewContract from '../ViewContract/BuyerViewContract';
+
 import './App.css';
 
 function App() {
@@ -80,9 +84,33 @@ function App() {
               <ViewContractList />
           </Route>
 
+
+
+
+          <Route exact path="/buyer_contract">
+              <BuyerViewContractList />
+          </Route>
+
+
+
+
+
+
           <Route exact path="/contract_details/:contractID">
             <ViewContract />
           </Route>
+
+
+
+
+          <Route exact path="/buyer_contract_details/:contractID">
+            <BuyerViewContract />
+          </Route>
+
+
+
+
+
 
           <Route exact path='/edit_NIR/:fieldID/:NIRID'>
             <EditNIR />

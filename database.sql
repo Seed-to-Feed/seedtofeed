@@ -53,8 +53,10 @@ CREATE TABLE "transaction_type" (
 );
 
 
+-- ADDED THE "buyer_id" TO THE TABLE IN ORDER TO GET THE VIEW CONTRACTS BY BUYER TO WORK
 CREATE TABLE "contract" (
 	"id" serial NOT NULL,
+	"buyer_id" integer,
 	"user_field_id" integer NOT NULL,
 	"commodity" integer NOT NULL,
 	"open_status" integer NOT NULL,
@@ -70,7 +72,7 @@ CREATE TABLE "contract" (
 	CONSTRAINT "contract_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
-);
+); 
 
 
 CREATE TABLE "NIR" (
@@ -164,6 +166,8 @@ ALTER TABLE "arbitrary_data" ADD CONSTRAINT "arbitrary_data_fk0" FOREIGN KEY ("f
 -- NEW CONNECTIONS!!!
 ALTER TABLE "buyer_field" ADD CONSTRAINT "buyer_field_fk0" FOREIGN KEY ("field_id") REFERENCES "field"("id") ON DELETE CASCADE;
 ALTER TABLE "buyer_field" ADD CONSTRAINT "buyer_field_fk1" FOREIGN KEY ("buyer_id") REFERENCES "user"("id") ON DELETE CASCADE;
+-- MORE NEW CONNECTIONS!!!
+ALTER TABLE "contract" ADD CONSTRAINT "contract_fk3" FOREIGN KEY ("buyer_id") REFERENCES "user"("id") ON DELETE CASCADE;
 
 
 

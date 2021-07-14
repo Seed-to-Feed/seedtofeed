@@ -68,7 +68,7 @@ function Nav() {
         </div>
         <div>
           {user.buyer === true && user.id && (
-            <Link className="navLink" to='/contract'>Contracts</Link>
+            <Link className="navLink" to='/buyer_contract'>Contracts</Link>
           )}
 
           {/* {user.buyer === true && user.id && (
