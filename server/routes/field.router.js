@@ -302,7 +302,9 @@ router.post('/create_NIR', rejectUnauthenticated, (req, res) => {
     const protein = req.body.protein; // $4
     const energy = req.body.energy; //$5
     const amino_acids = req.body.amino_acids; // $6
-    const tested_at = req.body.tested_at // $7
+    const tested_at = req.body.tested_at; // $7
+    const transaction = req.body.fieldTrans;
+    const fieldStatus = req.body.fieldStatus;
 
     const queryText = `INSERT INTO "NIR" 
     ("field_id", "oil", "moisture", "protein", "energy", "amino_acids", "tested_at") 
@@ -314,9 +316,9 @@ router.post('/create_NIR', rejectUnauthenticated, (req, res) => {
             const field_id = result.rows[0].field_id;
             console.log('field id is', field_id);
             const queryTransaction = `INSERT INTO "field_transactions"("field_id", "timestamp", "status_notes", "field_status",
-        "transaction_type") VALUES($1, Now(), 'NIR added', 'NIR added', 11) RETURNING *; `;
+        "transaction_type") VALUES($1, Now(), 'NIR added', $2, $3) RETURNING *; `;
 
-            pool.query(queryTransaction, [field_id])
+            pool.query(queryTransaction, [field_id, fieldStatus, transaction])
                 .then((result) => {
                     console.log('Updating transaction table with NIR', result.rows);
                 }).catch(error => {
@@ -370,7 +372,9 @@ router.put('/update_NIR/', rejectUnauthenticated, (req, res) => {
     const protein = req.body.protein;
     const energy = req.body.energy;
     const amino_acids = req.body.amino_acids;
-    const transaction_id = req.body.fieldTrans;
+    const transaction = req.body.fieldTrans;
+    const fieldStatus = req.body.fieldStatus;
+
 
     const queryText = `UPDATE "NIR"
     SET "oil" = $1, "moisture" = $2, "protein" = $3, "energy" = $4, "amino_acids" = $5
@@ -381,9 +385,9 @@ router.put('/update_NIR/', rejectUnauthenticated, (req, res) => {
             console.log('field id is', field_id);
 
             const queryUpdate = `INSERT INTO "field_transactions"("field_id", "timestamp", "status_notes", "field_status",
-            "transaction_type") VALUES($1, Now(), 'NIR updated', 'NIR updated', $2) RETURNING *; `;
+            "transaction_type") VALUES($1, Now(), 'NIR updated', $2, $3) RETURNING *;`;
 
-            pool.query(queryUpdate, [field_id, transaction_id])
+            pool.query(queryUpdate, [field_id, fieldStatus, transaction])
                 .then((result) => {
                     console.log('Updating transaction table with NIR', result.rows);
                     res.sendStatus(201);

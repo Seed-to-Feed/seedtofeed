@@ -22,6 +22,11 @@ function EditNIR() {
   const NIRID = params.NIRID;
   const field_id = params.fieldID;
 
+  const transType = useSelector((store) => store.fieldTransactionsReducer)
+
+  //obtain field status of field NIR that is being edited
+  const fieldTrans = transType[0].transaction_type;
+
   console.log(params);
 
   useEffect(() => {

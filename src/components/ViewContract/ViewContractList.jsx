@@ -14,9 +14,12 @@ import Grid from '@material-ui/core/Grid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+
 import '../App/App.css';
 
-const trashCan = <FontAwesomeIcon variant="outlined" icon={faTrashAlt} />;
+const trashCan = <FontAwesomeIcon icon={faTrashAlt} />;
 const details = <FontAwesomeIcon icon={faInfoCircle} />;
 
 function ViewContractList(params) {
@@ -26,13 +29,7 @@ function ViewContractList(params) {
   const userID = params.userID;
   console.log('Here is the user in ViewContractList:', userID);
 
-
-
   const user = useSelector((store) => store.user);
-
-
-
-
 
   useEffect(() => {
     if (user.farmer === true) {
@@ -46,11 +43,6 @@ function ViewContractList(params) {
       });
     }
   }, [user]);
-
-
-
-
-
 
   // REDUCER STORE
   const contractList = useSelector((store) => store.contractListReducer);
@@ -75,7 +67,11 @@ function ViewContractList(params) {
     <center>
       <div className="title-indent">
         <h1>Contract List</h1>
-        <h4>A list of your contracts appear below, click details for more information.  If you want to add, please select Add New Contract</h4>
+
+        <h4>
+          A list of your contracts appear below, click details for more
+          information. If you want to add, please select Add New Contract
+        </h4>
       </div>
       <Grid container spacing={3}>
         <Grid item xs={1} />
@@ -89,7 +85,7 @@ function ViewContractList(params) {
                   <TableCell>Location</TableCell>
                   <TableCell>Status</TableCell>
                   <TableCell>Commodity</TableCell>
-                  <TableCell></TableCell>
+                  <TableCell>Details / Delete</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -121,7 +117,7 @@ function ViewContractList(params) {
                           )
                         }
                       >
-                        Details
+                        {details}
                       </Button>
 
                       {user.farmer && (
@@ -156,13 +152,14 @@ function ViewContractList(params) {
 
 
 
-          </p>
-        </Grid>
+          </p >
+        </Grid >
         <Grid item xs={1} />
-      </Grid>
-
+      </Grid >
+      <div className="back-button">
+        <Button onClick={() => history.goBack()}>⬅ Go Back</Button>
+      </div>
     </center >
-
   );
 }
 
