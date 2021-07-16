@@ -14,6 +14,12 @@ import Grid from '@material-ui/core/Grid';
 
 import '../App/App.css';
 
+<<<<<<< Updated upstream
+=======
+const trashCan = <FontAwesomeIcon variant="outlined" icon={faTrashAlt} />;
+const details = <FontAwesomeIcon icon={faInfoCircle} />;
+
+>>>>>>> Stashed changes
 function ViewContractList(params) {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -31,9 +37,10 @@ function ViewContractList(params) {
 
   useEffect(() => {
     if (user.farmer === true) {
-    dispatch({
-      type: 'FETCH_CONTRACT_LIST',
-    });}
+      dispatch({
+        type: 'FETCH_CONTRACT_LIST',
+      });
+    }
     if (user.buyer === true) {
       dispatch({
         type: 'FETCH_BUYER_CONTRACT_LIST',
@@ -106,6 +113,9 @@ function ViewContractList(params) {
                     <TableCell>
                       <Button
                         size="small"
+                        size="large"
+                        title="Details"
+                        color="default"
                         onClick={() =>
                           history.push(
                             `/contract_details/${contract.contractID}`
@@ -115,8 +125,9 @@ function ViewContractList(params) {
                         Details
                       </Button>
 
+<<<<<<< Updated upstream
 
-                        {user.farmer &&
+                    {user.farmer &&
                       <Button
                         size="small"
                         color="secondary"
@@ -126,17 +137,30 @@ function ViewContractList(params) {
                       </Button>}
 
 
+=======
+                      {user.farmer && (
+                      <Button
+                        className="button-icons"
+                        size="large"
+                        title="Delete"
+                        color="default"
+                        onClick={() => deleteButton(contract.contractID)}
+                      >
+                        {trashCan}
+                      </Button>
+                    )}
+>>>>>>> Stashed changes
                     </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </TableContainer>
-          <p>
+        <p>
 
 
 
-            {user.farmer &&
+          {user.farmer &&
             <Button
               size="small"
               onClick={() => history.push(`/contract_form/`)}
@@ -147,9 +171,9 @@ function ViewContractList(params) {
 
 
 
-          </p>
-        </Grid>
-        <Grid item xs={1} />
+        </p>
+      </Grid>
+      <Grid item xs={1} />
       </Grid>
 
     </center >

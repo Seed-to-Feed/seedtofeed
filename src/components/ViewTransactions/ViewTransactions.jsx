@@ -69,7 +69,7 @@ function ViewTransactions(params) {
                         return (
                             <tr key={event.field_transactions_ID}>
                                 <td>
-                                <Moment format="LLL">{event.timestamp}</Moment>
+                                    <Moment format="LLL">{event.timestamp}</Moment>
                                 </td>
                                 <td>
                                     {event.field_status}
@@ -95,9 +95,15 @@ function ViewTransactions(params) {
             </table>
 
             {user.farmer &&
+<<<<<<< Updated upstream
                 <button onClick={() => history.push(`/add_transaction/${fieldID}`)}>
                     New Event
                 </button>}
+=======
+                <Button onClick={() => history.push(`/add_transaction/${fieldID}`)}>
+                    New Transaction
+                </Button>}
+>>>>>>> Stashed changes
 
         </center>
     )

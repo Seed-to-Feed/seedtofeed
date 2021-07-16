@@ -89,6 +89,7 @@ function ViewFields(params) {
                 <Button color="secondary" onClick={() => deleteButton(field.id)}>Delete</Button>
                 </TableCell>
             </TableRow>
+<<<<<<< Updated upstream
             );
           })}
         </TableBody>
@@ -97,6 +98,60 @@ function ViewFields(params) {
     <p>
     <Button onClick={() => history.push(`/add_field/`)}>Add new Field</Button>
     </p>
+=======
+          </TableHead>
+          <TableBody>
+            {fieldList.map((field) => {
+              console.log('This field is: ', field);
+              return (
+                <TableRow key={field.id}>
+                  <TableCell>
+                    <Button
+                      onClick={() => history.push(`/field_details/${field.id}`)}
+                    >
+                      {field.name}
+                    </Button>
+                  </TableCell>
+                  <TableCell>{field.location}</TableCell>
+                  <TableCell>{field.field_status}</TableCell>
+                  <TableCell>{field.field_note}</TableCell>
+                  <TableCell>
+                    Buyer Here{' '}
+                    {isOpen && (
+                      <SetBuyer togglePopup={togglePopup} fieldID={field.id} />
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    <Button onClick={() => togglePopup()}>Add Buyer</Button>
+                    <Button
+                      className="button-icons"
+                      title="Edit"
+                      color="default"
+                      onClick={() => history.push(`/edit_field/${field.id}`)}
+                    >
+                      {edit}
+                    </Button>{' '}
+                    <Button
+                      className="button-icons"
+                      title="Delete"
+                      color="default"
+                      onClick={() => deleteButton(field.id)}
+                    >
+                      {trashCan}
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <p>
+        <Button onClick={() => history.push(`/add_field/`)}>
+          Add new Field
+        </Button>
+      </p>
+>>>>>>> Stashed changes
     </center>
   );
 }

@@ -5,6 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+// import Select from '@material-ui/core/Select';
+// import MenuItem from '@material-ui/core/MenuItem';
+// import FormControl from '@material-ui/core/FormControl';
+
 
 function AddNIR() {
   //(field_id, oil, moisture, protein, energy, amino_acids, tested_at)
@@ -15,6 +19,16 @@ function AddNIR() {
 
   const field_id = params.fieldID;
 
+  //use effect to pull in field status options
+
+  const fieldStatus = useSelector((store) => store.transactionTypesReducer);
+  console.log('field status types are', fieldStatus);
+
+  // useEffect(() => {
+  //   dispatch({
+  //     type: 'FETCH_TRANSACTION_TYPES',
+  //   });
+  // }, []);
   //gets current date and time.
   const tested_at = new Date();
 
@@ -28,6 +42,10 @@ function AddNIR() {
   const [protein, setProtein] = useState('');
   const [energy, setEnergy] = useState('');
   const [amino_acids, setAminoAcids] = useState('');
+  // const [field_status, setFieldStatus] = useState('');
+
+
+
 
   function addNIR(event) {
     event.preventDefault();
@@ -41,6 +59,7 @@ function AddNIR() {
         protein: protein,
         energy: energy,
         amino_acids: amino_acids,
+        // field_status: field_status,
         tested_at: tested_at,
       },
     });
@@ -126,6 +145,29 @@ function AddNIR() {
       />
       <br />
       <br />
+      {/* <FormControl size="small">
+        <Select
+          variant="outlined"
+          value={field_status}
+          required
+          style={{ width: '155px' }}
+          onChange={(event) => setFieldStatus(event.target.value)}
+          displayEmpty
+        >
+          <MenuItem value="" disabled size="small">
+            <em>Field Status</em>
+          </MenuItem>
+          {fieldStatus?.map((status) => {
+            return (
+              <MenuItem key={status.id} value={status.id}>
+                {status.field_status}
+              </MenuItem>
+            );
+          })}
+        </Select>
+      </FormControl>
+      <br />
+      <br /> */}
       <Button
         size="small"
         type="button"
