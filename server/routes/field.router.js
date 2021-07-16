@@ -19,7 +19,7 @@ router.get('/buyerFieldList', rejectUnauthenticated, (req, res) => {
     JOIN "user_field" ON "user_field"."field_id"="field"."id"
     WHERE "buyer_field"."buyer_id"=$1;`;
 
-    pool.query(queryText, [userID]).then(async function(result) {
+    pool.query(queryText, [userID]).then(async function (result) {
         console.log(result.rows);
         let modifiedFields = [];
         for (let field of result.rows) {
@@ -51,7 +51,7 @@ router.get('/fieldList', rejectUnauthenticated, (req, res) => {
 
     console.log('The ID for this user is: ', userID);
 
-        const queryText = `
+    const queryText = `
     SELECT "field"."id", "user_field"."id" AS "user_field_id", "field"."year", "field"."location", "field"."acres", "field"."field_note",
 
     "field"."name", "field"."image", "field"."shape_file", "field"."gmo", "field"."crop_id"
@@ -60,14 +60,14 @@ router.get('/fieldList', rejectUnauthenticated, (req, res) => {
     WHERE "user_field"."user_id"=$1
     ORDER BY "field"."id" ASC;`; // Added  "user_field"."user_id" AS "farmer_id"
 
-    
+
     // const queryText = `
     // SELECT "field"."id", "user_field"."id" AS "user_field_id", "field"."year", "field"."location", "field"."acres", "field"."field_note",
     // "field"."name", "field"."image", "field"."shape_file", "field"."gmo", "field"."crop_id"
     // FROM "field"
     // JOIN "user_field" ON "user_field"."field_id"="field"."id"
     // WHERE "user_field"."user_id"=$1;`; // Need to find a way to add the following without it breaking:   "buyer_field"."id" AS "buyer_field_id", "buyer_field"."buyer_id"     and     JOIN "buyer_field" ON "buyer_field"."field_id"="field"."id"
-    
+
 
     // We want each field to ALSO have a 'computed' field_status column
     // But that is on the most recent transaction for each given field
@@ -370,6 +370,7 @@ router.put('/update_NIR/', rejectUnauthenticated, (req, res) => {
     const protein = req.body.protein;
     const energy = req.body.energy;
     const amino_acids = req.body.amino_acids;
+    const transaction_id = req.body.fieldTrans;
 
     const queryText = `UPDATE "NIR"
     SET "oil" = $1, "moisture" = $2, "protein" = $3, "energy" = $4, "amino_acids" = $5
@@ -380,9 +381,9 @@ router.put('/update_NIR/', rejectUnauthenticated, (req, res) => {
             console.log('field id is', field_id);
 
             const queryUpdate = `INSERT INTO "field_transactions"("field_id", "timestamp", "status_notes", "field_status",
-            "transaction_type") VALUES($1, Now(), 'NIR updated', 'NIR updated', 11) RETURNING *; `;
+            "transaction_type") VALUES($1, Now(), 'NIR updated', 'NIR updated', $2) RETURNING *; `;
 
-            pool.query(queryUpdate, [field_id])
+            pool.query(queryUpdate, [field_id, transaction_id])
                 .then((result) => {
                     console.log('Updating transaction table with NIR', result.rows);
                     res.sendStatus(201);

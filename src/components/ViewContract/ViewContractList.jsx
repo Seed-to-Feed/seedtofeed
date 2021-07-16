@@ -11,15 +11,14 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 import '../App/App.css';
 
-<<<<<<< Updated upstream
-=======
 const trashCan = <FontAwesomeIcon variant="outlined" icon={faTrashAlt} />;
 const details = <FontAwesomeIcon icon={faInfoCircle} />;
 
->>>>>>> Stashed changes
 function ViewContractList(params) {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -125,55 +124,41 @@ function ViewContractList(params) {
                         Details
                       </Button>
 
-<<<<<<< Updated upstream
-
-                    {user.farmer &&
-                      <Button
-                        size="small"
-                        color="secondary"
-                        onClick={() => deleteButton(contract.contractID)}
-                      >
-                        Delete
-                      </Button>}
-
-
-=======
                       {user.farmer && (
-                      <Button
-                        className="button-icons"
-                        size="large"
-                        title="Delete"
-                        color="default"
-                        onClick={() => deleteButton(contract.contractID)}
-                      >
-                        {trashCan}
-                      </Button>
-                    )}
->>>>>>> Stashed changes
+                        <Button
+                          className="button-icons"
+                          size="large"
+                          title="Delete"
+                          color="default"
+                          onClick={() => deleteButton(contract.contractID)}
+                        >
+                          {trashCan}
+                        </Button>
+                      )}
                     </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </TableContainer>
-        <p>
+          <p>
 
 
 
-          {user.farmer &&
-            <Button
-              size="small"
-              onClick={() => history.push(`/contract_form/`)}
-            >
-              Add New Contract
-            </Button>}
+            {user.farmer &&
+              <Button
+                size="small"
+                onClick={() => history.push(`/contract_form/`)}
+              >
+                Add New Contract
+              </Button>}
 
 
 
 
-        </p>
-      </Grid>
-      <Grid item xs={1} />
+          </p>
+        </Grid>
+        <Grid item xs={1} />
       </Grid>
 
     </center >

@@ -14,7 +14,13 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
+
 import '../App/App.css';
+
+const trashCan = <FontAwesomeIcon icon={faTrashAlt} />;
+const edit = <FontAwesomeIcon icon={faEdit} />;
 
 function ViewFields(params) {
   const dispatch = useDispatch();
@@ -33,72 +39,39 @@ function ViewFields(params) {
     });
   }, []);
 
-
-
-
   const [isOpen, setIsOpen] = useState(false);
- 
+
   const togglePopup = () => {
     setIsOpen(!isOpen);
-  }
-
-
-
+  };
 
   function deleteButton(fieldID) {
-    let remove = confirm(
-      'Are you sure you would like to delete this field? Once deleted it can not be retrieved again.'
-    );
-    if (remove == true) {
+    if (confirm('Are you sure you would like to delete this field?')) {
       dispatch({
         type: 'DELETE_FIELD',
         payload: fieldID,
       });
-    } else {
-      return;
     }
   }
 
   return (
     <center>
-    <TableContainer component={Paper}>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Field Name</TableCell>
-            <TableCell>Location</TableCell>
-            <TableCell>Status</TableCell>
-            <TableCell>Note</TableCell>
-            <TableCell>Buyers</TableCell>
-            <TableCell></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {fieldList.map((field) => {
-            console.log('This field is: ', field);
-            return (
-            <TableRow key={field.id}>
-              <TableCell><Button onClick={() => history.push(`/field_details/${field.id}`)}>{field.name}</Button></TableCell>
-              <TableCell>{field.location}</TableCell>
-              <TableCell>{field.field_status}</TableCell>
-              <TableCell>{field.field_note}</TableCell>
-              <TableCell>Buyer Here {isOpen && <SetBuyer togglePopup={togglePopup} fieldID={field.id}/>}</TableCell>
-              <TableCell>
-                <Button onClick={() => togglePopup()}>Add Potential Buyer</Button>
-                <Button onClick={() => history.push(`/edit_field/${field.id}`)} >Edit</Button> / 
-                <Button color="secondary" onClick={() => deleteButton(field.id)}>Delete</Button>
-                </TableCell>
+      <h4 className="page-title">
+        This is a list of all of your current fields. Please click field to see
+        more details or add new field to enter a new field.
+      </h4>
+      <br />
+      <TableContainer component={Paper}>
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>Field Name</TableCell>
+              <TableCell>Location</TableCell>
+              <TableCell>Status</TableCell>
+              <TableCell>Note</TableCell>
+              <TableCell>Buyers</TableCell>
+              <TableCell>Edit / Delete</TableCell>
             </TableRow>
-<<<<<<< Updated upstream
-            );
-          })}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    <p>
-    <Button onClick={() => history.push(`/add_field/`)}>Add new Field</Button>
-    </p>
-=======
           </TableHead>
           <TableBody>
             {fieldList.map((field) => {
@@ -151,7 +124,6 @@ function ViewFields(params) {
           Add new Field
         </Button>
       </p>
->>>>>>> Stashed changes
     </center>
   );
 }

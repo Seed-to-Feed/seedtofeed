@@ -15,7 +15,7 @@ router.get('/getall', rejectUnauthenticated, (req, res) => {
     const userID = req.user.id;
 
     const queryText = `
-   SELECT "contract"."id" AS "contractID", "contract"."commodity", "contract"."open_status",
+SELECT "contract"."id" AS "contractID", "contract"."commodity", "contract"."open_status",
 "contract"."bushel_uid", "contract"."quantity_fulfilled", "contract"."price", "contract"."protein", "contract"."oil",
 "contract"."moisture", "contract"."contract_quantity", "contract"."contract_handler", "contract"."container_serial",
 "user_field"."id" AS "user_field_ID",

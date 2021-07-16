@@ -12,6 +12,12 @@ function EditNIR() {
   const params = useParams();
 
   const fieldNIR = useSelector((store) => store.fieldNIRReducer);
+  const transType = useSelector((store) => store.transactionTypesReducer)
+
+  //obtain field status of field NIR that is being added
+  const fieldTrans = transType.filter((transaction) => transaction.id === Number(field_id));
+  console.log('transaction type is', fieldTrans);
+
 
   const NIRID = params.NIRID;
   const field_id = params.fieldID;
@@ -48,6 +54,7 @@ function EditNIR() {
         protein: protein,
         energy: energy,
         amino_acids: amino_acids,
+        fieldTrans: fieldTrans,
       },
     });
 
@@ -138,7 +145,7 @@ function EditNIR() {
         Cancel
       </Button>
       {`\u00A0\u00A0\u00A0\u00A0`}
-      <Button size="small" type="submit" onClick={(event) => addNIR(event)}>
+      <Button size="small" type="submit" onClick={(event) => button(event)}>
         Update
       </Button>
     </Router>

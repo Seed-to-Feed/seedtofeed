@@ -17,18 +17,14 @@ function AddNIR() {
   const history = useHistory();
   const params = useParams();
 
-  const field_id = params.fieldID;
+  const field_id = params.field_id;
 
-  //use effect to pull in field status options
+  const transType = useSelector((store) => store.transactionTypesReducer)
 
-  const fieldStatus = useSelector((store) => store.transactionTypesReducer);
-  console.log('field status types are', fieldStatus);
+  //obtain field status of field NIR that is being added
+  const fieldTrans = transType.filter((transaction) => transaction.id === Number(field_id));
+  console.log('transaction type is', fieldTrans);
 
-  // useEffect(() => {
-  //   dispatch({
-  //     type: 'FETCH_TRANSACTION_TYPES',
-  //   });
-  // }, []);
   //gets current date and time.
   const tested_at = new Date();
 
@@ -42,10 +38,6 @@ function AddNIR() {
   const [protein, setProtein] = useState('');
   const [energy, setEnergy] = useState('');
   const [amino_acids, setAminoAcids] = useState('');
-  // const [field_status, setFieldStatus] = useState('');
-
-
-
 
   function addNIR(event) {
     event.preventDefault();
@@ -59,7 +51,7 @@ function AddNIR() {
         protein: protein,
         energy: energy,
         amino_acids: amino_acids,
-        // field_status: field_status,
+        fieldTrans: fieldTrans,
         tested_at: tested_at,
       },
     });

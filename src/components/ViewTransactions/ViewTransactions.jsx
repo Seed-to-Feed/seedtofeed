@@ -95,15 +95,9 @@ function ViewTransactions(params) {
             </table>
 
             {user.farmer &&
-<<<<<<< Updated upstream
-                <button onClick={() => history.push(`/add_transaction/${fieldID}`)}>
-                    New Event
-                </button>}
-=======
                 <Button onClick={() => history.push(`/add_transaction/${fieldID}`)}>
                     New Transaction
                 </Button>}
->>>>>>> Stashed changes
 
         </center>
     )
