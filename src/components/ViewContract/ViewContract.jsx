@@ -52,10 +52,12 @@ function ViewContract({ fieldID }) {
   //   console.log(contract);
   //   return contract.contractID === Number(params.contractID);
   // });
-  console.log('the fieldID for the contract', fieldID);
-  console.log('the userID for the contract', user.id);
-  const foundContracts = contracts.filter((contract) => contract.user === user.id);
-  console.log('We have some contracts', foundContracts);
+  // console.log('the fieldID for the contract', fieldID);
+  // console.log('the userID for the contract', user.id);
+  const foundContracts = contracts.filter((contract) => contract.userID === user.id);
+  // console.log('We have some contracts', foundContracts);
+  const currentContract = foundContracts[foundContracts.length - 1];
+  // console.log('the current contract', currentContract);
 
   if (foundContracts.length === 0) {
     return (
@@ -178,13 +180,12 @@ function ViewContract({ fieldID }) {
       <center>
       
       <h1>Contract Details</h1>
-      {foundContracts?.map((contract) => {
-        return (
+      
           <Grid container spacing={3}>
           <Grid item xs={4} />
   
           <Grid item>
-            <h4>Contract Handler: {contract.contract_handler}</h4>
+            <h4>Contract Handler: {currentContract.contract_handler}</h4>
             <TableContainer component={Paper}>
               <Table size='small'>
                 <TableHead>
@@ -211,21 +212,21 @@ function ViewContract({ fieldID }) {
                     </TableCell>
                     <TableCell>
                       <br />
-                      {contract.contractID}
+                      {currentContract.contractID}
                       <br />
-                      {contract.first_name} {contract.last_name}
+                      {currentContract.first_name} {currentContract.last_name}
                       <br />
-                      {contract.crop_type}
+                      {currentContract.crop_type}
                       <br />
-                      {contract.name}
+                      {currentContract.name}
                       <br />
-                      {contract.contract_quantity}
+                      {currentContract.contract_quantity}
                       <br />
-                      {contract.quantity_fulfilled}
+                      {currentContract.quantity_fulfilled}
                       <br />
-                      {contract.container_serial}
+                      {currentContract.container_serial}
                       <br />
-                      {contract.price}
+                      {currentContract.price}
                       <br />
                       <br />
                     </TableCell>
@@ -235,7 +236,7 @@ function ViewContract({ fieldID }) {
             </TableContainer>
           </Grid>
           <Grid item>
-            <h4>NIR Quality Expectations: {contract.bushel_uid}</h4>
+            <h4>NIR Quality Expectations: {currentContract.bushel_uid}</h4>
             <TableContainer component={Paper}>
               <Table size='small'>
                 <TableHead>
@@ -259,15 +260,15 @@ function ViewContract({ fieldID }) {
                     </TableCell>
                     <TableCell>
                       <br />
-                      {contract.amino_acids}%
+                      {currentContract.amino_acids}%
                       <br />
-                      {contract.energy}%
+                      {currentContract.energy}%
                       <br />
-                      {contract.protein}%
+                      {currentContract.protein}%
                       <br />
-                      {contract.oil}%
+                      {currentContract.oil}%
                       <br />
-                      {contract.moisture}%
+                      {currentContract.moisture}%
                       <br />
                       <br />
                       <br />
@@ -281,10 +282,7 @@ function ViewContract({ fieldID }) {
           </Grid>
           <Grid item xs={4} />
         </Grid>
-  
-        );
-        
-      })}
+
       <div className='back-button'>
         <Button onClick={() => history.goBack()}>⬅ Go Back</Button>
       </div>
