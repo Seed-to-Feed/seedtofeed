@@ -54,120 +54,123 @@ function ViewContract({ fieldID }) {
   // });
   console.log('the fieldID for the contract', fieldID);
   console.log('the userID for the contract', user.id);
+  const foundContracts = contracts.filter((contract) => contract.user === user.id);
+  console.log('We have some contracts', foundContracts);
 
-  if (contracts?.length === 1) {
+  if (foundContracts.length === 0) {
     return (
+      <h3>No Contracts for this field</h3>
 
-      <center>
+      // <center>
   
-        <h1>Contract Details</h1>
+      //   <h1>Contract Details</h1>
   
-        <Grid container spacing={3}>
-          <Grid item xs={4} />
+      //   <Grid container spacing={3}>
+      //     <Grid item xs={4} />
   
-          <Grid item>
+      //     <Grid item>
   
-            <h4>Contract Handler: {contracts[0]?.contract_handler}</h4>
-            <TableContainer component={Paper}>
-              <Table size='small'>
-                <TableHead>
-                  <TableRow>
-                    <TableCell align='right'>
-                      <br />
-                      Contract ID:
-                      <br />
-                      Grower:
-                      <br />
-                      Commodity:
-                      <br />
-                      Status:
-                      <br />
-                      Contract Quantity:
-                      <br />
-                      Quantity Fulfilled:
-                      <br />
-                      Container S/N:
-                      <br />
-                      Price:
-                      <br />
-                      <br />
-                    </TableCell>
-                    <TableCell>
-                      <br />
-                      {contracts[0]?.contractID}
-                      <br />
-                      {contracts[0]?.first_name} {contracts[0]?.last_name}
-                      <br />
-                      {contracts[0]?.crop_type}
-                      <br />
-                      {contracts[0]?.name}
-                      <br />
-                      {contracts[0]?.contract_quantity}
-                      <br />
-                      {contracts[0]?.quantity_fulfilled}
-                      <br />
-                      {contracts[0]?.container_serial}
-                      <br />
-                      {contracts[0]?.price}
-                      <br />
-                      <br />
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-              </Table>
-            </TableContainer>
-          </Grid>
-          <Grid item>
-            <h4>NIR Quality Expectations:</h4>
-            <TableContainer component={Paper}>
-              <Table size='small'>
-                <TableHead>
-                  <TableRow>
-                    <TableCell align='right'>
-                      <br />
-                      Amino Acid:
-                      <br />
-                      Energy:
-                      <br />
-                      Protein:
-                      <br />
-                      Oil:
-                      <br />
-                      Moisture:
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                    </TableCell>
-                    <TableCell>
-                      <br />
-                      {contracts[0]?.amino_acids}%
-                      <br />
-                      {contracts[0]?.energy}%
-                      <br />
-                      {contracts[0]?.protein}%
-                      <br />
-                      {contracts[0]?.oil}%
-                      <br />
-                      {contracts[0]?.moisture}%
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-              </Table>
-            </TableContainer>
-          </Grid>
-          <Grid item xs={4} />
-        </Grid>
-        <div className='back-button'>
-          <Button onClick={() => history.goBack()}>⬅ Go Back</Button>
-        </div>
-      </center>
+      //       <h4>Contract Handler: {contracts[0]?.contract_handler}</h4>
+      //       <TableContainer component={Paper}>
+      //         <Table size='small'>
+      //           <TableHead>
+      //             <TableRow>
+      //               <TableCell align='right'>
+      //                 <br />
+      //                 Contract ID:
+      //                 <br />
+      //                 Grower:
+      //                 <br />
+      //                 Commodity:
+      //                 <br />
+      //                 Status:
+      //                 <br />
+      //                 Contract Quantity:
+      //                 <br />
+      //                 Quantity Fulfilled:
+      //                 <br />
+      //                 Container S/N:
+      //                 <br />
+      //                 Price:
+      //                 <br />
+      //                 <br />
+      //               </TableCell>
+      //               <TableCell>
+      //                 <br />
+      //                 {contracts[0]?.contractID}
+      //                 <br />
+      //                 {contracts[0]?.first_name} {contracts[0]?.last_name}
+      //                 <br />
+      //                 {contracts[0]?.crop_type}
+      //                 <br />
+      //                 {contracts[0]?.name}
+      //                 <br />
+      //                 {contracts[0]?.contract_quantity}
+      //                 <br />
+      //                 {contracts[0]?.quantity_fulfilled}
+      //                 <br />
+      //                 {contracts[0]?.container_serial}
+      //                 <br />
+      //                 {contracts[0]?.price}
+      //                 <br />
+      //                 <br />
+      //               </TableCell>
+      //             </TableRow>
+      //           </TableHead>
+      //         </Table>
+      //       </TableContainer>
+      //     </Grid>
+      //     <Grid item>
+      //       <h4>NIR Quality Expectations: {contracts[0]?.bushel_uid}</h4>
+      //       <TableContainer component={Paper}>
+      //         <Table size='small'>
+      //           <TableHead>
+      //             <TableRow>
+      //               <TableCell align='right'>
+      //                 <br />
+      //                 Amino Acid:
+      //                 <br />
+      //                 Energy:
+      //                 <br />
+      //                 Protein:
+      //                 <br />
+      //                 Oil:
+      //                 <br />
+      //                 Moisture:
+      //                 <br />
+      //                 <br />
+      //                 <br />
+      //                 <br />
+      //                 <br />
+      //               </TableCell>
+      //               <TableCell>
+      //                 <br />
+      //                 {contracts[0]?.amino_acids}%
+      //                 <br />
+      //                 {contracts[0]?.energy}%
+      //                 <br />
+      //                 {contracts[0]?.protein}%
+      //                 <br />
+      //                 {contracts[0]?.oil}%
+      //                 <br />
+      //                 {contracts[0]?.moisture}%
+      //                 <br />
+      //                 <br />
+      //                 <br />
+      //                 <br />
+      //                 <br />
+      //               </TableCell>
+      //             </TableRow>
+      //           </TableHead>
+      //         </Table>
+      //       </TableContainer>
+      //     </Grid>
+      //     <Grid item xs={4} />
+      //   </Grid>
+      //   <div className='back-button'>
+      //     <Button onClick={() => history.goBack()}>⬅ Go Back</Button>
+      //   </div>
+      // </center>
     );
   
   } else {
@@ -175,7 +178,7 @@ function ViewContract({ fieldID }) {
       <center>
       
       <h1>Contract Details</h1>
-      {contracts?.map((contract) => {
+      {foundContracts?.map((contract) => {
         return (
           <Grid container spacing={3}>
           <Grid item xs={4} />

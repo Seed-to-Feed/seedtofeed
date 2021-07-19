@@ -21,6 +21,8 @@ function StatusTracker(params) {
 
   let detail = details[details.length - 1]; // This would get the latest entry in the store, assuming that the newest entry is also the newest date.
   const userContract = contracts?.filter((contract) => (contract.userID === user.id) && contract.fieldID === fieldID);
+  console.log('the userContract on statusTracker', userContract);
+
 
   
   // console.log('user Contract', userContract);
