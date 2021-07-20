@@ -97,9 +97,9 @@ function AddTransaction() {
         <Button
           className='form-cancel'
           size="small"
-          onClick={() => {
-            history.push('/user');
-          }}
+          onClick={() =>
+            history.push(`/field_details/${field_id}`)
+          }
         >
           Cancel
         </Button>

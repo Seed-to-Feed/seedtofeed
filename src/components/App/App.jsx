@@ -120,7 +120,7 @@ function App() {
             <AddTransaction />
           </Route>
 
-          <Route exact path = '/signum'>
+          <Route exact path='/signum'>
             <Signum />
           </Route>
 
