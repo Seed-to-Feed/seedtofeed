@@ -51,8 +51,8 @@ function AddTransaction() {
 
   return (
     <center>
-    <Router>
-      <h1>Add New Transaction</h1>
+      <Router>
+        <h1>Add New Transaction</h1>
         <TextField
           variant="outlined"
           label="Notes"
@@ -107,9 +107,9 @@ function AddTransaction() {
         <Button className='form-submit' size="small" onClick={(event) => submitButton(event)}>
           Submit
         </Button>
-    </Router >
+      </Router >
     </center>
-    );
+  );
 }
 
 export default AddTransaction;
